@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const router = express.Router();
 
 const products = require('./routes/api/products');
+const categories = require('./routes/api/categories');
 
 const app = express();
 
@@ -19,7 +21,10 @@ mongoose
     .catch(err => console.log(err));
 
 // Use Routes
-app.use('/api/products', products);
+router.use('/api/products', products);
+router.use('/api/categories', categories);
+
+app.use('/', router);
 
 const port = 5000;
 
