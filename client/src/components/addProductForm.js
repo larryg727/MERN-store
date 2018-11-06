@@ -12,6 +12,7 @@ const AddProductForm = props => {
             name: name,
             price: price * 100
         };
+        e.target.reset();
         props.handleNewProduct(product);
     };
 

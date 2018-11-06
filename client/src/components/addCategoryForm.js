@@ -6,6 +6,7 @@ const AddCategoryForm = props => {
     const handleFormSubmit = e => {
         e.preventDefault();
         const name = nameRef.current.value;
+        e.target.reset();
         props.handleNewCategory(name);
     };
 

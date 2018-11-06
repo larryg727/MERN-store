@@ -1,0 +1,23 @@
+.formInput {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 10px 5px;
+    min-width: 240px;
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    padding: 7px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    min-width: 60px;
+}
+
+button:hover {
+    cursor: pointer;
+}

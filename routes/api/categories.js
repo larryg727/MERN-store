@@ -35,4 +35,23 @@ router.delete('/:id', (req, res) => {
         .catch(err => res.status(404).json({ success: false }));
 });
 
+// @route POST api/categories/add/sub
+// @desc Add a subcategory to a category
+// @access Public for now
+router.post('/add/sub', (req, res) => {
+    const newSubcategory = new Subcategory({
+        name: req.body.subName
+    });
+    newSubcategory
+        .save()
+        .then(subcategory => {
+            Category.findById(req.body.id).then(category => {
+                category.subcategories.push(subcategory._id);
+                category.save();
+            });
+        })
+        .then(idk => res.json({ success: true }))
+        .catch(err => console.log(err));
+});
+
 module.exports = router;
