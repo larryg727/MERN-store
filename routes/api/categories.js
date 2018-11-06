@@ -8,9 +8,18 @@ const Subcategory = require('../../models/Subcategory');
 // @desc Get all categories
 // @access Public
 router.get('/', (req, res) => {
-    Category.find()
-        .sort({ name: 1 })
-        .then(categories => res.json(categories));
+    // Category.find()
+    //     .sort({ name: 1 })
+    //     .then(categories => res.json(categories));
+    Category.find({})
+        .populate({ path: 'subcategories', model: Subcategory })
+        .exec((err, categories) => {
+            console.log(categories);
+            if (err) {
+                console.log(err);
+            }
+            res.json(categories);
+        });
 });
 
 // @route POST api/categories/add
@@ -49,8 +58,9 @@ router.post('/add/sub', (req, res) => {
                 category.subcategories.push(subcategory._id);
                 category.save();
             });
+            return subcategory;
         })
-        .then(idk => res.json({ success: true }))
+        .then(subcategory => res.json(subcategory))
         .catch(err => console.log(err));
 });
 

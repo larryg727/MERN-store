@@ -58,7 +58,16 @@ class Admin extends Component {
                 subName: subcategory.name,
                 id: subcategory.catId
             })
-        });
+        })
+            .then(response => response.json())
+            .then(results => {
+                fetch('/api/categories')
+                    .then(res => res.json())
+                    .then(results => {
+                        this.setState({ categories: results });
+                    });
+            })
+            .catch(err => console.log(err));
     };
 
     componentDidMount() {
