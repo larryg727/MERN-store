@@ -25,13 +25,16 @@ class Login extends Component {
             .then(response => response.json())
             .then(result => {
                 console.log(result);
-                if (result) {
+                if (result && result.success) {
+                   this.props.login(result)
                     this.setState({ success: true });
                 } else {
                     this.setState({ error: true });
                 }
             });
     };
+
+
 
     render() {
         return (

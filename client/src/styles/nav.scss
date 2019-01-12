@@ -55,6 +55,7 @@
     position: relative;
     overflow: hidden;
     padding: 8px;
+    cursor: pointer;
 }
 .hvr-underline-from-center:before {
     content: '';
@@ -78,7 +79,6 @@
     left: 0;
     right: 0;
 }
-
 
 @include sm {
     .navLinks {

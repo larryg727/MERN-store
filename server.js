@@ -15,6 +15,15 @@ const app = express();
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
+// Authenticate users jwt token
+app.use((req, res, next) => {
+    console.log(req.url);
+    console.log(req.headers);
+    // TODO: make conditions on which routes need auth
+    // jwt.verity(req.authorization)
+    next();
+});
+
 //  DB Config
 const db = process.env.MONGO_URI;
 

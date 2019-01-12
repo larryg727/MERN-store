@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const User = require('../../models/User');
 
@@ -23,8 +24,12 @@ router.post('/authenticate', (req, res) => {
                 bcrypt
                     .compare(req.body.password, user.password)
                     .then(result => {
-                        console.log('result: ', result);
-                        res.json({ success: result });
+                        if (result) {
+                            const token = jwt.sign({ user: user.email }, process.env.JWT_SECRET, { expiresIn: 2 * 60 });
+                            res.json({ success: result, token: token, isAdmin: user.isAdmin });
+                        } else {
+                            res.json({ success: false });
+                        }
                     })
                     .catch(err => {
                         console.log(err);
