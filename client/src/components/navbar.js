@@ -20,8 +20,13 @@ const Navbar = props => {
                     </NavLink>
                 </div>
                 <div className="hvr-underline-from-center">
-                    <NavLink to='/register' activeClassName='active'>
+                    <NavLink to="/register" activeClassName="active">
                         Register
+                    </NavLink>
+                </div>
+                <div className="hvr-underline-from-center">
+                    <NavLink to="/login" activeClassName="active">
+                        Login
                     </NavLink>
                 </div>
                 {props.isAdmin ? (

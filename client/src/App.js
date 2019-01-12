@@ -7,6 +7,7 @@ import Admin from './components/admin/Admin';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Register from './components/register/Register';
+import Login from './components/login/Login';
 
 class App extends Component {
     state = {
@@ -24,6 +25,7 @@ class App extends Component {
                             <Route path="/products" component={Products} />
                             {this.state.isAdmin ? <Route path="/admin" component={Admin} /> : null}
                             <Route path="/register" component={Register} />
+                            <Route path="/login" component={Login} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

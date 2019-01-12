@@ -7,12 +7,15 @@ const RegisterForm = props => {
 
     const handleFormSubmit = e => {
         e.preventDefault();
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        const confirmPass = confirmPassRef.current.value;
-        console.log('email', email);
-        console.log('pass', password);
-        console.log('confirm', confirmPass);
+        const user = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            confirmPass: confirmPassRef.current.value
+        };
+        props.submitRegisterForm(user);
+        passwordRef.current.value = '';
+        confirmPassRef.current.value = '';
+        passwordRef.current.focus();
     };
 
     return (

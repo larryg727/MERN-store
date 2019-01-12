@@ -1,10 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
+require('dotenv').config();
+
 const router = express.Router();
 
 const products = require('./routes/api/products');
 const categories = require('./routes/api/categories');
+const user = require('./routes/api/user');
 
 const app = express();
 
@@ -12,7 +16,7 @@ const app = express();
 app.use(bodyParser.json());
 
 //  DB Config
-const db = require('./config/keys').mongoURI;
+const db = process.env.MONGO_URI;
 
 // Connect to Mongo
 mongoose
@@ -23,6 +27,7 @@ mongoose
 // Use Routes
 router.use('/api/products', products);
 router.use('/api/categories', categories);
+router.use('/api/user', user);
 
 app.use('/', router);
 
