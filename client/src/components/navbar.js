@@ -19,6 +19,11 @@ const Navbar = props => {
                         Products
                     </NavLink>
                 </div>
+                <div className="hvr-underline-from-center">
+                    <NavLink to='/register' activeClassName='active'>
+                        Register
+                    </NavLink>
+                </div>
                 {props.isAdmin ? (
                     <div className="hvr-underline-from-center">
                         <NavLink to="/admin" activeClassName="active">
