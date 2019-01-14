@@ -4,13 +4,6 @@ import CompanyLogo from '../images/companyLogo.png';
 import AuthContext from '../AuthContext';
 
 const Navbar = props => {
-    const logout = () => {
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('isAdmin');
-        window.location.reload();
-        //TODO: reload history to take to login or home route.
-    };
-
     return (
         <AuthContext.Consumer>
             {auth => {
@@ -31,7 +24,7 @@ const Navbar = props => {
                                 </NavLink>
                             </div>
                             {auth.isAuthenticated ? (
-                                <div className="hvr-underline-from-center" onClick={logout}>
+                                <div className="hvr-underline-from-center" onClick={auth.logout}>
                                     Logout
                                 </div>
                             ) : (

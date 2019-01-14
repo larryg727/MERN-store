@@ -75,7 +75,14 @@ class Admin extends Component {
         fetch('/api/categories', {
             headers: new Headers({ Authorization: this.context.token })
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.status === 401) {
+                    this.context.logout();
+                    throw new Error('Unauthorized');
+                } else {
+                    return response.json();
+                }
+            })
             .then(results => {
                 console.log(results);
                 this.setState({

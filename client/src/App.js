@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Products from './components/products/Prouducts';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import history from './history';
 import Navbar from './components/navbar';
 import Home from './components/home/Home';
 import Admin from './components/admin/Admin';
@@ -14,7 +15,8 @@ class App extends Component {
     state = {
         isAdmin: false,
         isAuthenticated: false,
-        token: ''
+        token: '',
+        logout: () => this.logout()
     };
 
     init = () => {
@@ -33,6 +35,18 @@ class App extends Component {
         sessionStorage.setItem('token', auth.token);
         sessionStorage.setItem('isAdmin', auth.isAdmin);
         this.init();
+        if (this.state.isAdmin) {
+            history.push('/admin')
+        }else if (this.state.isAuthenticated) {
+            history.push('/')
+        }
+    };
+
+    logout = () => {
+        history.push('/login');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('isAdmin');
+        this.init();
     };
 
     componentDidMount() {
@@ -41,7 +55,7 @@ class App extends Component {
 
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <AuthContext.Provider value={this.state}>
                     <div>
                         <Navbar isAdmin={this.state.isAdmin} />

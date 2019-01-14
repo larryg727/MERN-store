@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
     Category.find({})
         .populate({ path: 'subcategories', model: Subcategory })
         .exec((err, categories) => {
-            console.log(categories);
             if (err) {
                 console.log(err);
             }
