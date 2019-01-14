@@ -8,8 +8,7 @@ import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
-
-export const AuthContext = React.createContext();
+import AuthContext from './AuthContext';
 
 class App extends Component {
     state = {

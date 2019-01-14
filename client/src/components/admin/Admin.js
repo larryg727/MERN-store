@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AddProductForm from './addProductForm';
 import AddCategoryForm from './addCategoryForm';
 import AddSubCategoryForm from './addSubcategoryForm';
+import AuthContext from '../../AuthContext';
 
 class Admin extends Component {
     state = {
@@ -71,7 +72,9 @@ class Admin extends Component {
     };
 
     componentDidMount() {
-        fetch('/api/categories')
+        fetch('/api/categories', {
+            headers: new Headers({ Authorization: this.context.token })
+        })
             .then(response => response.json())
             .then(results => {
                 console.log(results);
@@ -99,5 +102,5 @@ class Admin extends Component {
         );
     }
 }
-
+Admin.contextType = AuthContext;
 export default Admin;

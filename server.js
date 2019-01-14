@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
@@ -18,9 +19,15 @@ app.use(bodyParser.json());
 // Authenticate users jwt token
 app.use((req, res, next) => {
     console.log(req.url);
-    console.log(req.headers);
+    console.log(req.headers.authorization);
     // TODO: make conditions on which routes need auth
-    // jwt.verity(req.authorization)
+    jwt.verify(req.headers.authorization, process.env.JWT_SECRET, (err, decoded) => {
+        if (decoded) {
+            console.log(decoded);
+        } else {
+            console.log(err);
+        }
+    });
     next();
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import CompanyLogo from '../images/companyLogo.png';
-import { AuthContext } from '../App';
+import AuthContext from '../AuthContext';
 
 const Navbar = props => {
     const logout = () => {
