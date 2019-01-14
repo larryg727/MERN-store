@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require('../../auth');
+const auth = require('../../auth');
 const User = require('../../models/User');
 
 // @route POST api/user/register
@@ -14,8 +14,8 @@ router.post('/register', (req, res) => {
     newUser.save().then(user => console.log(user) || res.json({ result: true }));
 });
 
-router.post('/authenticate', (req, res) => {
-    const results = authenticate(req.body.username, req.body.password)
+router.post('/authenticate', async (req, res) => {
+    const results = await auth.authenticate(req.body.username, req.body.password);
     if (results.success) {
         res.json({ success: true, token: results.token, isAdmin: results.isAdmin });
     } else {
